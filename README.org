@@ -1,3 +1,5 @@
 * Gatsby Orga Sample
 
 Thanks to gatsby orga starter project, [[https://github.com/orgapp/orgajs][orga]] with [[https://www.gatsbyjs.com][gatsby]].
+
+https://github.com/orgapp/gatsby-orga
