@@ -1,0 +1,518 @@
+#+TITLE: 機械学習の学習
+
+* CourseraのNg先生のコースのノート
+
+** regularization
+Increasing lambda results in less overfitting but also greater bias. 
+
+** neural network
+
+*** forwordpropagation algorithm
+*** backproppagation algorithm
+合成関数の微分を使って微分を計算すること。
+
+- [[https://www.quora.com/How-do-you-explain-back-propagation-algorithm-to-a-beginner-in-neural-network][How do you explain back propagation algorithm to a beginner in neural network? - Quora]]
+
+*** gradient checking
+*** random initialization
+#+BEGIN_SRC octave
+Theta1 = rand(10, 11)*(2*INIT_EPSILON) - INIT_EPSILON
+#+END_SRC
+
+** 次にどうするか
+*** Evaluating a Hypothesis
+
+overfitting しとるかどうか
+training set を 7:3 などに分割してみて(ランダムに分けた方がよい)、70%だけをtraining setとしてみる。30%をtest samplesとする。
+overfitting のときは、J(theta)は低いのに $J_{test}(\theta)$ は高いとなっている。
+
+misclassification error
+err(h(x), y) = 1 if h(x) >= 0.5, y = 0 or if h(x) < 0.5, y = 1 \\ 0 otherwise
+
+*** Model Selection and Train/Validation/Test Sets
+多項式の次数をいくつまでにするか
+
+dataset の 60% を training set, 20% を cross validation set, 20% を test set に。
+それぞれ training error, cross validation error, test error を計算する。
+
+多項式の次数 d をパラメタとして、cv set に fit する。
+
+*** Diagnosing bias vs. variance バイアスなのか分散なのか
+
+regularization parameter λ を 0, 0.01, 0.02, 0.04, ... などと変化させながら、
+それぞれJ(\theta)を最小化するthetaを計算。
+そのthetaによって$J_{\mathrm{cv}}(\theta)$を計算して$J_cv$が小さかった$\theta$のときのλを選択する。
+
+*** Learning curves
+学習曲線
+training set size を増やしていくと J_train はだんだん増えていくが J_CV は減っていく。
+しかし high bias のときには高いところで水平に推移していき、J train と  CV との差が少ない。
+
+high variance のときにはその差が大きく、 J_CV も割とずっと減っていく。
+
+*** 次にどうするか
+- fixes high variance
+  - training example を増やす
+  - set of features を小さくする
+  - λを増やす
+- fixes high bias
+  - set of features を大きくする
+  - polynomial features を追加する
+  - λを減らす
+
+*** まず汚くても早い実装をする
+cross varidation error をチェックする。
+
+*** skewed Data
+[[https://www.coursera.org/learn/machine-learning/lecture/tKMWX/error-metrics-for-skewed-classes][Error Metrics for Skewed Classes - Stanford University | Coursera]]
+
+skew しているとき(positiveがnegativeよりうんと多いとか)。
+precision, recall を計算する。
+
+pとrから p+r / 2 ではなく、F_1 score という \( 2 pr/(p+r) \) というのを使うと結構いい。
+
+*** Large data rationale
+
+パラメタをたくさんにする。regression なら特徴をたくさんに。neural networkなら隠れユニットをたくさんに。
+
+low bias。
+J_trainが小さく。
+
+その上で大きなtraining setを使う。
+J_train ~~ J_test
+J_test が小さくなる。
+low variance
+
+** unsupervised learning
+*** k-means
+cost function J はdistortion functionとも呼ばれる。
+
+local optimaになることがあるので、
+random initialization して最小のJを与えるクラスタリングを選択するのがよい。
+initialization はランダムな点ではなく、サンプルそのものにする。
+
+
+じゃあどうやってクラスタ数Kを計算するのか。
+Kを変化させてJを計算する。
+プロットしたときにエルボーがあればそこに設定する。それがはっきりしないときもある。
+
+** PCA
+dim n を dim k に削減する。(n > k)
+では k をいくつにすればよいか。
+
+1/m sum_{i=1}^{m} | x^i - x^i_{approx} |^2 / (1/m sum_{i=1}^{m} | x^{(i)} |^2 )
+
+が、たとえば 0.01 未満になる最小のkを選ぶ。
+そのときは 99% of variance is retained という。
+
+- k = 1
+- U_reduce, z1, z2, ..., zm, x1a, ..., xma
+- check 上の値
+- [U, S, V] = svd(Sigma)
+
+実際には、svd で対角行列 S (対角成分s_{11}, ..., s_{nn}) を得たら、
+1 - sum^k s_ii / sum^n s_ii
+を計算する。
+
+*** 次元削減のメリット
+- 圧縮して高速化する
+- 2、3次元にして可視化する
+
+*** 気をつけること
+- overfittingに取り組むときはやばい。regularizationを使え。
+- 次元削減しなければ行けなくなってからPCAせよ。最初はオリジナルを使え。
+
+** Anomaly detection 異常検知
+
+例 正規分布だとして各パラメタごとに確率を計算する。
+
+10000 good ones, 20 flawed ones.
+
+- Training set: 6000 good ones.
+- CV: 2000 good ones, 10 anomalous
+- Test: 2000 good ones, 10 anomalous
+
+cv と test set ちゃんと別々にする。
+
+evaluationは、とてもひずんだものなので、全部normalと判定するだけで高評価になってしまうので注意。
+precision/recall, F_1 score などを使おう。
+
+*** anomaly detection vs 教師あり学習
+**** Anomaly detecion がいい場合
+- positive examples が少ない。
+- anomalyにめっちゃいろんな種類がある。
+
+**** 教師あり学習がいい場合
+positive も negative もどっちもたくさんある。
+
+*** featureをどう選ぶかがかなり大事
+
+histを実行してみて分布がガウス分布のようでなかったら、例えばlogを取ってみるなどする。
+log(x), log(x+1), sqrt(x), x^1/3 などしてみる。
+
+feature 1 で異常値のはずが正常値と判定されるexampleの場合、x_2 という feature を付け加えてそれが異常値になるようにすれば全体的に異常値エリアに来る。 
+新しい feature は今までのものから計算してもよい。x_5 := x_1 / x_3 など。
+
+** Recommendation system
+
+Content Based Recommendations
+
+映画ごとにfeaturesが既にあるとして作られるシステム。線形回帰をする。
+
+ランダムに初期化して parameter theta と features x を代わる代わる学習させてして収束させる。
+
+それよりも、theta と x を両方いっぺんに予想することもできる。
+
+collaborative filtering という。
+
+low rank matrix factorization ともいう。
+
+各映画の特徴ベクトルを持ってきて、距離が近いのをおすすめする。
+
+*** mean normalization
+映画のrationの行列で各平均を引く。
+その行列をデータにして学習させれば、まだ全くレイティングしていないユーザに平均のレイティング予想をすることができる。
+
+** 大規模データを扱う
+learning curve をプロットしてみて J_train(theta), J_CV(theta) が m = 1000 ぐらいでもう接近していたら、もうそれ以上増やしてもよくならないことがわかる。
+そうだったら、次にfeatureを増やしたり隠れユニットを増やしたりして、曲線が接近しないものになることもある。そうすると初めて1億examplesをやってみる。
+
+*** 確率的最急降下法
+今までの最急降下法をバッチ最急降下法 (batch gradient descentと呼ぶ。
+Stochastic gradient descent はまずデータをシャッフルしておいて、
+theta_j を update するときに、なんと全方向の偏微分の和を取らない。1つの偏微分だけ引く。
+
+Mini-batch gradient descent: Use b examples in each iteration
+b=2 to 100 (10ぐらい)
+
+Stochastic gradient descent の収束判定。
+iterations 1000回ごとに cost(theta, (xs,yx)) の1000個の平均をプロットする。
+
+(それに対して、batch のときは J_train(θ) をプロットする。(全データの和))
+
+- ぎざぎざだが全体としてだんだん下がっている
+- 学習率を下げる。
+- 5000ごとにしたらなめらかに下がることもある。
+- 対して下がってないこともある。
+- 学習率を変えたりする。
+- 上がっていたら発散しているかも。学習率を下げてみよう。
+- 学習率アルファをだんだん下げるのもいいことがある。例えば、アルファ = const1 / (iteration回数 + const2) とする。でも const1,2 の調整に時間がかかる。
+
+*** online learning
+ユーザデータ(x,y)が来るたんびに学習する。今までのデータを全部使って学習するわけではない。(x,y)だけでθをアップデートする。
+
+CTR = Click Through Rate
+
+*** map reduce
+
+** Photo Optical Character Recognition (OCR)
+組み合わせ方
+パイプライン
+- text detection
+  - どこに文字が書いてあるか検知する
+- character segmentation
+  - 文字ごとに分割
+- characer classification
+  - 文字ごとに何の文字か判定する
+- さらにエラー訂正する
+  - 例 c1eaning -> cleaning
+
+
+- sliding windows
+  - スキャンしていく
+  - 文字がありそうなところを検出
+  - その文字がありそうな矩形に対してさらに 1D sliding window をして、文字の区切りになりそうなところを検出する。
+
+
+人工データ合成
+- 大量のlow biasなデータを得る方法
+- 無から作る方法と、少ないデータを増やす方法がある
+- 文字であれば、
+  - いろんなフォントから画像を作る方法
+  - 既にある文字画像からゆがみなどを加えて別の画像を作り出す方法
+- 音なら
+  - ノイズを加えるとか、人混みの中の背景を加えるとか、電話っぽく品質を落とすとか
+
+人工的にデータを作る前に今持っているデータが低バイアスかどうかを確認するべきだ。学習曲線を描く。高バリアンスではないことを確認する。低バイアスでなければ、特徴を増やしてみたり隠れユニットを増やしたりする。それをやってなければ、結局1週間を無駄にすることがある。
+「データを10倍にするのにどれだけの労力が必要か」をNg先生はよく聞く。
+
+Ceiling Analysis (天井分析)
+- 各パイプライン項目を手動で完璧にしたら、全体としてどのぐらいの正確さになるかを逐一計算する。
+- するとその項目を完璧にするのに手間をかける意味があるかがわかる。
+
+Ng先生は直感を信じてはいけないことを学んだ。
+
+
+* fast.ai
+** Lesson 1
+GPU借りるところ
+- crestle.com
+- paperspace.com
+
+** Swiftの
+[[https://www.fast.ai/2019/03/06/fastai-swift/][fast.ai Embracing Swift for Deep Learning · fast.ai]]
+
+Requirement: completion of [[https://course.fast.ai/][Practical Deep Learning for Coders, v3 | fast.ai course v3]]
+
+* Random forest
+ 
+* XGBoost
+
+* MCMC
+粒子をばらまき確率分布も同時に求める。
+Gibbs sampling
+update
+ちょっとずつ動かすと収束する(?)
+
+* Deep learning
+** activation functions
+- sigmoid
+- ReLU
+- Swish
+- Gelu
+- Mish [[https://github.com/digantamisra98/Mish][digantamisra98/Mish]]
+
+* NLP
+** fastText
+- [[https://github.com/facebookresearch/fastText][fastText]]
+- [[https://qiita.com/icoxfog417/items/42a95b279c0b7ad26589][FacebookのfastTextでFastに単語の分散表現を獲得する - Qiita]]
+
+** Wizard-of-Oz法
+トピック洗練に必要な操作
+
+HITL Tipic Modeling (2018)
+(human in the loop)
+
+** Transformers
+- [[http://jalammar.github.io/illustrated-gpt2/][The Illustrated GPT-2 (Visualizing Transformer Language Models) – Jay Alammar – Visualizing machine learning one concept at a time]]
+- [[http://www.peterbloem.nl/blog/transformers][Transformers from scratch | Peter Bloem]] tutorial, PyTorch 実装
+- [[https://arxiv.org/abs/2012.09164][[2012.09164] Point Transformer]] ([[https://github.com/lucidrains/point-transformer-pytorch][Implementation]])
+- [[https://arxiv.org/abs/2012.09688][[2012.09688] PCT: Point Cloud Transformer]] ([[https://github.com/MenghaoGuo/PCT][implementation]])
+- [[https://elyza-inc.hatenablog.com/entry/2021/03/25/160727][BERT以降の事前学習済みモデルのトレンドと主要モデルを紹介！ Part 1 学習方法編 - ELYZA Tech Blog]]
+- [[https://www.slideshare.net/cvpaperchallenge/transformer-247407256][Transformer メタサーベイ]]
+- [[https://arxiv.org/abs/2105.03824][[2105.03824] FNet: Mixing Tokens with Fourier Transforms]]
+- [[https://arxiv.org/abs/2105.08050][[2105.08050] Pay Attention to MLPs]] MLPを使ったらTransformerなくてもいいという論文 [[https://github.com/lucidrains/g-mlp-pytorch][implementation in Pytorch]]
+- [[https://arxiv.org/abs/2104.07652][[2104.07652] Geometry-Free View Synthesis: Transformers and no 3D Priors]]
+  
+** Flair
+[[https://github.com/flairNLP/flair][flair]] は PyTorch製のNLPフレームワーク。
+
+- [[https://yag-ays.github.io/project/swem_flair/][Flairを使ってSWEMによる文章埋め込みを計算する - Out-of-the-box]]
+
+** GPT*
+
+- [[https://jalammar.github.io/illustrated-gpt2/][The Illustrated GPT-2 (Visualizing Transformer Language Models) – Jay Alammar – Visualizing machine learning one concept at a time.]]
+- [[https://huggingface.co/EleutherAI/gpt-neo-2.7B][EleutherAI/gpt-neo-2.7B · Hugging Face]] Hugging FaceによるGPT-Neo
+
+* Generative Adversarial Networks (GAN)
+- [[https://elix-tech.github.io/ja/2017/02/06/gan.html][はじめてのGAN]]
+
+- [[http://dena.com/intl/anime-generation/][Full-body high-resolution Anime Generation with Progressive Structure-conditional Generative Adversarial Networks | DeNA Co., Ltd.]] かわいい。
+
+- アニメキャラのモーフィング https://twitter.com/lark1115caster/status/1002542499087302658
+
+- [[https://github.com/shayneobrien/generative-models][shayneobrien/generative-models: Annotated, understandable, and visually interpretable PyTorch implementations of: VAE, BIRVAE, NSGAN, MMGAN, WGAN, WGANGP, LSGAN, DRAGAN, BEGAN, RaGAN, InfoGAN, fGAN, FisherGAN]]
+
+PGGAN
+- [[https://tsunotsuno.hatenablog.com/entry/2018/06/03/223849][【論文メモ:PGGAN】Progressive Growing of GANs for Improved Quality, Stability, and Variation - Re:ゼロから始めるML生活]]
+
+CycleGAN
+- [[https://junyanz.github.io/CycleGAN/][CycleGAN Project Page]]
+  - [[https://arxiv.org/abs/1703.10593][{1703.10593} Unpaired Image-to-Image Translation using Cycle-Consistent Adversarial Networks]] 論文
+  - [[https://github.com/junyanz/pytorch-CycleGAN-and-pix2pix][junyanz/pytorch-CycleGAN-and-pix2pix: Image-to-image translation in PyTorch]] 著者による実装
+- [[https://github.com/ShangxuanWu/CycleGAN-Face-off][ShangxuanWu/CycleGAN-Face-off: Code for "CycleGAN Face-off" by Shangxuan Wu, Xiaohan Jin and Ye Qi.]]
+
+StyleGAN
+- [[https://arxiv.org/abs/1812.04948][{1812.04948} A Style-Based Generator Architecture for Generative Adversarial Networks]]
+- [[https://qiita.com/d-ogawa/items/d645509e3ccedc989680][A Style-Based Generator Architecture for Generative Adversarial Networks を読んだ - Qiita]]
+- [[https://github.com/lernapparat/lernapparat/blob/master/style_gan/pytorch_style_gan.ipynb][lernapparat/pytorch_style_gan]] PyTorch実装
+  
+** 関連
+- [[https://arxiv.org/abs/2105.05233][[2105.05233] Diffusion Models Beat GANs on Image Synthesis]]
+
+** for NLP
+- [[https://arxiv.org/abs/1705.10929][{1705.10929} Adversarial Generation of Natural Language]]
+- [[https://www.quora.com/Can-one-use-generative-adversarial-networks-in-NLP-related-problems][Can one use generative adversarial networks in NLP related problems? - Quora]]
+- [[https://www.quora.com/Can-Generative-Adversarial-Networks-GANs-be-applied-to-text][Can Generative Adversarial Networks (GANs) be applied to text? - Quora]]
+
+** 音声
+- [[http://r9y9.github.io/blog/2017/10/05/ganvc/][【声質変換編】Statistical Parametric Speech Synthesis Incorporating Generative Adversarial Networks {arXiv:1709.08041} - LESS IS MORE]]
+- [[http://r9y9.github.io/blog/2017/10/09/gantts/][【音声合成編】Statistical Parametric Speech Synthesis Incorporating Generative Adversarial Networks {arXiv:1709.08041} - LESS IS MORE]]
+- [[https://r9y9.github.io/nnmnkwii/latest/][nnmnkwii (nanami) documentation — nnmnkwii 0.0.15+e9f07a3 documentation]]
+- [[https://nico-opendata.jp/ja/casestudy/2stack_voice_conversion/report.html][統計的声質変換を行うための知識と手法]]
+- [[https://qiita.com/KSRG_Miyabi/items/2a3b5bdca464ec1154d7][キズナアイとねこますの声を入れ替える機械学習をした - Qiita]]
+
+* 顔・頭・ポーズ
+** Human Pose Estimation
+- [[http://stmind.hatenablog.com/entry/2018/05/23/234720][Deep Learning時代のPose Estimation研究 - stMind]]
+- [[https://github.com/anewell/pose-hg-train][anewell/pose-hg-train: Training and experimentation code used for "Stacked Hourglass Networks for Human Pose Estimation"]]
+- [[https://github.com/anewell/pose-hg-demo][anewell/pose-hg-demo: Code to test and use the model from "Stacked Hourglass Networks for Human Pose Estimation"]]
+- [[http://www.slideshare.net/plutoyang/mmlab-seminar-2016-deep-learning-for-human-pose-estimation][{Mmlab seminar 2016} deep learning for human pose estimation]]
+- [[https://medium.com/tensorflow/real-time-human-pose-estimation-in-the-browser-with-tensorflow-js-7dd0bc881cd5][Real-time Human Pose Estimation in the Browser with TensorFlow.js]] ([[https://github.com/tensorflow/tfjs-models/tree/master/posenet/demos][demo code]])
+- [[https://github.com/facebookresearch/DensePose][facebookresearch/DensePose: A real-time approach for mapping all human pixels of 2D RGB images to a 3D surface-based model of the body]]
+- [[https://github.com/t-takasaka/PoseNet-Unity][t-takasaka/PoseNet-Unity: PoseNet in Unity]]
+
+** Deep Video
+- https://twitter.com/memotv/status/997758273314086918
+- https://www.youtube.com/watch?v=qc5P2bvfl44
+
+** Head Pose
+- [[https://github.com/Ascend-Research/HeadPoseEstimation-WHENet][Ascend-Research/HeadPoseEstimation-WHENet]]
+
+* Databases
+** The Ryerson Audio-Visual Database of Emotional Speech and Song
+- https://twitter.com/RyersonSMARTLab/status/997267162153869312
+- [[http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0196391][The Ryerson Audio-Visual Database of Emotional Speech and Song (RAVDESS): A dynamic, multimodal set of facial and vocal expressions in North American English]]
+- [[https://zenodo.org/record/1188976#.WwNgWy_ANkY][The Ryerson Audio-Visual Database of Emotional Speech and Song (RAVDESS) | Zenodo]]
+
+* DNN
+一般
+** RNN
+- [[https://mosko.tokyo/post/pytorch-rnn/][PyTorchでRNN入門 | moskomule log]]
+
+** Graph
+- [[https://qiita.com/shionhonda/items/d27b8f13f7e9232a4ae5][GNNまとめ(1): GCNの導入 - Qiita]]
+
+** Attention
+- [[https://www.slideshare.net/yutakikuchi927/deep-learning-nlp-attention][最近のDeep Learning (NLP) 界隈におけるAttention事情]]
+- [[https://arxiv.org/abs/2103.03206v1][[2103.03206v1] Perceiver: General Perception with Iterative Attention]] 動画や音声にも使われる。
+
+* 物体認識・物体検出
+- [[https://github.com/tensorflow/models/blob/2986bcafb9eaa8fed4d78f17a04c4c5afc8f6691/research/object_detection/g3doc/tf2_detection_zoo.md][tensorflow/models リポジトリに置いてある物体認識動物園]]
+- SSD
+  - [[https://github.com/qfgaohao/pytorch-ssd][qfgaohao/pytorch-ssd: MobileNetV1, MobileNetV2, VGG based SSD/SSD-lite implementation in Pytorch 1.0 / Pytorch 0.4. Out-of-box support for retraining on Open Images dataset. ONNX and Caffe2 support. Experiment Ideas like CoordConv.]]
+- SSD MobileNet
+  - [[https://github.com/PINTO0309/MobileNet-SSD][PINTO0309/MobileNet-SSD]]
+- [[https://pjreddie.com/darknet/yolo/][YOLO: Real-Time Object Detection]]
+  - [[https://github.com/DeNA/PyTorch_YOLOv3/][YOLOv3のPyTorch実装]]
+  - [[https://github.com/dog-qiuqiu/Yolo-Fastest][dog-qiuqiu/Yolo-Fastest]]
+- [[https://github.com/hoya012/deep_learning_object_detection][hoya012/deep_learning_object_detection: A paper list of object detection using deep learning.]] 論文リスト
+- PeLee (@NeurIPS 2018)
+  - [[https://arxiv.org/abs/1804.06882][{1804.06882} Pelee: A Real-Time Object Detection System on Mobile Devices]]
+  - [[https://github.com/Robert-JunWang/Pelee][Robert-JunWang/Pelee: Pelee: A Real-Time Object Detection System on Mobile Devices]]
+  - [[https://qiita.com/saneatsu/items/b372a2d71a33616f7355][【論文読み】 Pelee: A Real-Time Object Detection System on Mobile Devices - Qiita]]
+- [[https://arxiv.org/abs/1904.08189v2][{1904.08189v2} CenterNet: Keypoint Triplets for Object Detection]]
+- [[https://medium.com/nanonets/how-to-automate-surveillance-easily-with-deep-learning-4eb4fa0cd68d][How to Automate Surveillance Easily with Deep Learning]]
+- MobileNet V1
+  - paper [[https://arxiv.org/abs/1704.04861][MobileNets: Efficient Convolutional Neural Networks for Mobile Vision Applications]]
+  - [[https://github.com/marvis/pytorch-mobilenet][marvis/pytorch-mobilenet]]
+- MobileNet V2
+  - paper [[https://arxiv.org/abs/1801.04381][MobileNetV2: Inverted Residuals and Linear Bottlenecks]]
+  - [[https://github.com/tonylins/pytorch-mobilenet-v2][tonylins/pytorch-mobilenet-v2]]
+  - [[https://github.com/d-li14/mobilenetv2.pytorch][d-li14/mobilenetv2.pytorch]]
+- MobileNet V3
+  - [[https://arxiv.org/abs/1905.02244][[1905.02244] Searching for MobileNetV3]]
+  - [[https://github.com/d-li14/mobilenetv3.pytorch][d-li14/mobilenetv3.pytorch]]
+  - [[https://github.com/xiaochus/MobileNetV3][xiaochus/MobileNetV3: A Keras implementation of MobileNetV3.]]
+  - [[https://qiita.com/shinmura0/items/402619822e026fa73e58][【精度対決】MobileNet V3 vs V2 - Qiita]]
+- CenterNet
+  - [[https://github.com/xingyizhou/CenterNet][xingyizhou/CenterNet: Object detection, 3D detection, and pose estimation using center point detection:]]
+- CornetNet
+  - [[https://opencv.org/latest-trends-in-object-detection-from-cornernet-to-centernet-explained-part-ii-cornernet-lite/][Latest Trends in Object Detection: From CornerNet to CenterNet Explained. Part II: CornerNet-Lite]]
+- SAN
+  - NLP の self-attention を画像認識に応用
+  - [[https://qiita.com/omiita/items/f4fad6371747e718310e][Self-Attentionを全面的に使った新時代の画像認識モデルを解説！ - Qiita]]
+
+Servey系
+- [[https://www.slideshare.net/takanoriogata1121/ssd-single-shot-multibox-detector-eccv2016][SSD: Single Shot MultiBox Detector (ECCV2016)]]
+- [[https://www.slideshare.net/cvpaperchallenge/meta-study-group][物体検知（Meta Study Group 発表資料）]]
+- [[https://www.slideshare.net/ren4yu/single-shot][最近のSingle Shot系の物体検出のアーキテクチャまとめ]]
+- [[https://qiita.com/mshinoda88/items/9770ee671ea27f2c81a9][物体検出についての歴史まとめ - Qiita]]
+- [[https://www.slideshare.net/xyzw3/object-detection-190530][最近の物体検出 2019/05/30]]
+- [[https://arxiv.org/abs/2003.10152][SOLOv2]]
+- [[https://qiita.com/kazukiii/items/f5a35450a8dd02d3a266][物体検出のDeepLearning読むべき論文7選とポイントまとめ【EfficientDetまでの道筋】 - Qiita]]
+
+
+* 音声
+- [[https://github.com/pytorch/fairseq/tree/master/examples/wav2vec][wav2vec の事前学習済みモデル in fairseq]]
+
+* Video
+- [[http://chengao.vision/FGVC/][Flow-edge Guided Video Completion]]
+  
+* 講義リスト
+- [[http://www.fast.ai/][fast.ai · Making neural nets uncool again]]
+- Stanford University
+  - [[http://cs231n.stanford.edu/][CS231n: Convolutional Neural Networks for Visual Recognition]]
+  - [[http://cs224d.stanford.edu/][CS224d: Deep Learning for Natural Language Processing]]
+  - [[http://web.stanford.edu/class/cs224n/][CS224n: Natural Language Processing with Deep Learning]]
+    - [[https://www.youtube.com/playlist?list=PLoROMvodv4rOhcuXMZkNm7j3fVwBBY42z][その YouTube]]
+    - [[https://web.stanford.edu/class/cs224n/slides/Jacob_Devlin_BERT.pdf][Contextual Word Representations with BERT and Other Pre-trained Language Models (PDF)]]
+  - [[https://www.youtube.com/playlist?list=PL3FW7Lu3i5Jsnh1rnUwq_TcylNr7EkRe6&app=desktop][Lecture Collection | Natural Language Processing with Deep Learning (Winter 2017) - YouTube]]
+  - [[http://cs230.stanford.edu/][CS230 Deep Learning]]
+- [[https://www.dataschool.io/15-hours-of-expert-machine-learning-videos/][In-depth introduction to machine learning in 15 hours of expert videos]] An Introduction to Statistical Learning with Applications in R のオンライン講義
+- [[http://www.cs.ucl.ac.uk/degrees/msc_ml/][MSc Machine Learning]]
+- [[https://www.ucl.ac.uk/prospective-students/graduate/taught/degrees/machine-learning-msc][Machine Learning MSc | UCL London's Global University]]
+- [[http://www0.cs.ucl.ac.uk/staff/d.silver/web/Teaching.html][UCL Course on RL (Reinforcement Learning; 強化学習)]]
+- [[http://www.dataschool.io/15-hours-of-expert-machine-learning-videos/][In-depth introduction to machine learning in 15 hours of expert videos]]
+- [[https://chokkan.github.io/deeplearning/][Introduction to Deep Learning]] NLP, 東京工業大学
+- http://phontron.com/class/nn4nlp2019/
+  - https://www.youtube.com/playlist?list=PL8PYTP1V4I8Ajj7sY6sdtmjgkt7eo2VMs
+  - https://github.com/neubig/nn4nlp-code
+- [[http://introtodeeplearning.com/][MIT 6.S191: Introduction to Deep Learning]] MIT
+- [[https://atcold.github.io/pytorch-Deep-Learning/][Deep Learning]] Yann LeCun ニューヨーク大学, PyTorch
+- [[https://www.kaggle.com/learn/intro-to-deep-learning][Learn Intro to Deep Learning Tutorials]] (Kaggle)
+
+* ビデオ
+- [[https://www.youtube.com/user/keeroyz/videos][Two Minute Papers - YouTube]]
+
+* Confidence Graph
+- https://twitter.com/MLWave/status/997686170346811393
+- [[http://mlwave.github.io/tda/confidence-graphs.html][Confidence Graph for a MLP trained on MNIST | KeplerMapper]]
+
+* Docker
+nvidia-docker
+
+* Datasets
+- NICAM 気象モデル
+- アプレイザル評価表現辞書
+  - 自動車の評価の感情など
+  - [[https://www.gsk.or.jp/catalog/gsk2011-c/][GSK2011-C 日本語アプレイザル評価表現辞書 （JAppraisal 辞書）～態度評価編～ | GSK]]
+- [[https://www.cs.uic.edu/~liub/publications/kdd04-revSummary.pdf][Minqing Hu and Bing Liu, Mining and Summarizing Customer Reviews (PDF)]]
+- [[https://skymind.ai/wiki/open-datasets][Open Datasets | Skymind]] いろんなデータセットのリンク
+- [[http://codh.rois.ac.jp/char-shape/][日本古典籍くずし字データセット | ROIS-DS人文学オープンデータ共同利用センター]]
+- [[http://codh.rois.ac.jp/kmnist/][KMNISTデータセット（機械学習用くずし字データセット） | ROIS-DS人文学オープンデータ共同利用センター]]
+- [[https://nihcc.app.box.com/v/ChestXray-NIHCC][CXR8 | Powered by Box]]
+- [[https://magenta.tensorflow.org/datasets/groove][Groove MIDI Dataset]]
+- [[https://ai.facebook.com/blog/ccmatrix-a-billion-scale-bitext-data-set-for-training-translation-models/][CCMatrix: A billion-scale bitext data set for training translation models]]
+- Sales
+  - [[https://www.kaggle.com/c/competitive-data-science-predict-future-sales][Predict Future Sales | Kaggle]]
+  - [[https://www.kaggle.com/c/walmart-recruiting-sales-in-stormy-weather/data][Walmart Recruiting II: Sales in Stormy Weather | Kaggle]]
+
+* Competitions, Conferences
+- ILSVRC (ImageNet Large Scale Visual Recognition Challenge)
+
+* News
+- [[https://us13.campaign-archive.com/home/?u=67bd06787e84d73db24fb0aa5&id=6c9d98ff2c][Import AI Newsletter]]
+- [[http://newsletter.ruder.io/][NLP News | Revue]]
+- [[https://www.deeplearning.ai/thebatch/][The Batch - deeplearning.ai]]
+* webservices
+- [[https://www.comet.ml/site/][Comet]]
+
+* モデル変換
+- [[https://qiita.com/lain21/items/9f9f9707ebad4bbc627d][PyTorchで学習したモデルをTFLiteモデルに変換して使う - Qiita]]
+
+* support vector machine (SVM)
+- [[https://satopirka.com/2018/12/theory-and-implementation-of-linear-support-vector-machine/][線形SVMの理論と実装]]
+- [[https://ja.wikipedia.org/wiki/%E4%BA%8C%E6%AC%A1%E8%A8%88%E7%94%BB%E6%B3%95][二次計画法 - Wikipedia]]
+- [[http://www.dais.is.tohoku.ac.jp/~shioura/teaching/mp12/][2012年度 数理計画法 ‎www.dais.is.tohoku.ac.jp/~shioura/teaching/mp12/]] 講義資料に「非線形計画」など
+- [[https://www.ism.ac.jp/~fukumizu/ISM_lecture_2010/Kernel_4_SVM.pdf][(PDF) サポートベクターマシン 正定値カーネルによるデータ解析 - カーネル法の基礎と展開 -福水健次 統計数理研究所/総合研究大学院大学]]
+- [[https://www.slideshare.net/sleepy_yoshi/smo-svm][SMO徹底入門 - SVMをちゃんと実装する]]
+
+* 記事
+- [[https://dennybritz.com/blog/deep-learning-most-important-ideas/][Deep Learning's Most Important Ideas - A Brief Historical Review]]
+
+* ノート
+- [[https://github.com/machine-perception-robotics-group/MPRGDeepLearningLectureNotebook?fbclid=IwAR34mgSoTvckLDrwabGSJlS5nQcpECAmHb-kH8Jlx4dWGGNgGVQAwHF1sWk][machine-perception-robotics-group/MPRGDeepLearningLectureNotebook]] GAN, GCNも。PyTorch。
+  
+* 本
+- [[https://arxiv.org/abs/2105.04026][[2105.04026] The Modern Mathematics of Deep Learning]]
+- [[https://github.com/Runnrairu/Machine-Learning-text][Runnrairu/Machine-Learning-text: 一般的な機械学習入門]]
+  
+* 未分類ンフォ
+- AlexNet
+  - [[http://revast-blog.com/top/?p=57][リバストのブログ Deep Learningの概要]]
+- [[https://products.sint.co.jp/aisia/blog/tag/ai_blog_basics][ブログ | AI技術をぱっと理解する（基礎編） | AI（人工知能）サービス AISIA]]
+- [[https://machinelearningmastery.com/deep-learning-models-for-human-activity-recognition/][Deep Learning Models for Human Activity Recognition]]
+- [[http://www.codingwoman.com/youtube-channels-for-deep-learning-and-computer-vision/][Ultimate List of Youtube Channels for Deep Learning and Computer Vision — Coding Woman]] 深層学習とコンピュータビジョンのYouTubeチャンネルのリスト
+- [[https://github.com/yoyoyo-yo/DeepLearningMugenKnock][ディープラーニング∞本ノック!! - yoyoyo-yo/DeepLearningMugenKnock]]
+- [[https://www.youtube.com/watch?v=0VH1Lim8gL8][Deep Learning State of the Art (2020) | MIT Deep Learning Series - YouTube]]

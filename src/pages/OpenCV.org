@@ -1,0 +1,20 @@
+
+OpenCV
+
+cv::Mat*
+
+iOS で使うには
+pod 'OpenCV'
+が簡単。
+
+cap_ios.h というヘッダファイルに、
+CvVideoCamera など便利なクラスが定義されている。
+
+http://stackoverflow.com/questions/14206014/opencv-2-4-3-symbol-not-found-objc-setproperty-nonatomic-on-ios-5
+
+** ChangeLog
+- 4.4.0 [[https://github.com/opencv/opencv/wiki/ChangeLog#version440][ChangeLog · opencv/opencv Wiki]] Add Yolo v4, EfficientDet
+
+* 参考になるプロジェクト
+- https://github.com/mjp/FaceRecognition
+

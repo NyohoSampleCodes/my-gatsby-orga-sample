@@ -1,0 +1,5 @@
+
+
+- [[https://v8.dev/blog/math-random][There’s Math.random(), and then there’s Math.random() · V8]]
+- [[http://erlang.org/doc/man/rand.html][Erlang -- rand]]
+- [[http://xoshiro.di.unimi.it/][xoshiro/xoroshiro generators and the PRNG shootout]]

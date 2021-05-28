@@ -1,0 +1,29 @@
+#+TITLE: AtCoder
+
+[[https://atcoder.jp/][AtCoder]] で(競技)プログラミングの勉強をする。
+
+* 攻略サイト
+
+- [[https://qiita.com/drken/items/fd4e5e3630d0f5859067][AtCoder に登録したら次にやること ～ これだけ解けば十分闘える！過去問精選 10 問 ～ - Qiita]]
+- [[https://qiita.com/tubo28/items/e6076e9040da57368845][AtCoder に登録したら解くべき精選過去問 10 問を Rust で解いてみた - Qiita]]
+- [[https://qiita.com/hatoo@github/items/fa14ad36a1b568d14f3e][Rustで競技プログラミング スターターキット - Qiita]]
+- [[https://qiita.com/tanakh/items/0ba42c7ca36cd29d0ac8][Rustで競技プログラミングの入力をスッキリ記述するマクロ - Qiita]]
+- [[https://qiita.com/vain0x/items/512784ff60ce599dccae][Rustで競プロするときのプラクティス {2018秋} - Qiita]]
+- [[https://www.slideshare.net/chokudai/wap-atcoder2][実践・最強最速のアルゴリズム勉強会 第二回講義資料(ワークスアプリケーションズ & AtCoder)]]
+- [[https://www.slideshare.net/chokudai/arc031][AtCoder Regular Contest 031 解説]]
+- [[https://qiita.com/kotatsugame/items/184bfd63d9b21f214475][AtCoder Beginner ContestのA問題の最短コードを読む - Qiita]]
+
+** emotional
+
+- [[http://chokudai.hatenablog.com/entry/2018/12/04/193246][競技プログラミングと現代社会、および就職について - chokudaiのブログ]]
+- [[https://qiita.com/_EnumHack/items/3d7d50c43523c71ab307][新人エンジニアの私が圧倒的貢献をするためにやっていること - Qiita]]
+- [[http://chokudai.hatenablog.com/entry/2016/06/22/200436][何かを極めるということ。 - chokudaiのブログ]]
+
+  
+* Coders
+- [[https://atcoder.jp/users/nishionyama][nishionyama]]
+  - [[https://atcoder.jp/contests/abc197/submissions/21331721][提出 #21331721 - AtCoder Beginner Contest 197（Sponsored by Panasonic）]]
+- [[https://atcoder.jp/users/sansen][sansen]]
+  - [[https://atcoder.jp/contests/abc197/submissions/21296019][提出 #21296019 - AtCoder Beginner Contest 197（Sponsored by Panasonic）]]
+- bouzuya
+  - https://github.com/bouzuya/rust-atcoder/blob/master/abc199

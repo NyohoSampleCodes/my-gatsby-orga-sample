@@ -1,0 +1,10 @@
+
+ATOK
+
+* Tips
+
+- ctrl + shift + Y :: 再変換
+- ctrl + shift + B :: ATOK文字パレット
+- ctrl + shift + G :: ATOKパレット
+- ctrl + shift + U :: ATOK環境設定
+

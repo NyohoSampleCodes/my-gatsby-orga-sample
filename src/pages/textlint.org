@@ -1,0 +1,5 @@
+
+
+
+- [[https://github.com/textlint-ja/textlint-rule-preset-ja-technical-writing][textlint-ja/textlint-rule-preset-ja-technical-writing: 技術文書向けのtextlintルールプリセット]]
+  

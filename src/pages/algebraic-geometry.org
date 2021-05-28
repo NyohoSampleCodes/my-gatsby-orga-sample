@@ -1,0 +1,8 @@
+#+title: 代数幾何学
+
+代数幾何学に関することなら何でも
+
+* 講義
+- [[https://www.youtube.com/playlist?list=PL8yHsr3EFj50Un2NpfPySgXctRQK7CLG-][Algebraic geometry II: Schemes - YouTube]] by Richard E. Borcherds
+- [[https://www.youtube.com/watch?v=WTEZjR5aNjw][AGITTOC pseudolecture 1 (welcome; philosophy; some category theory) - YouTube]] by Ravil Vakil
+

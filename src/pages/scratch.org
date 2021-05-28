@@ -1,0 +1,13 @@
+
+scratch
+
+* Tips
+** クリックしたところの色を取る
+https://scratch.mit.edu/projects/10941245/editor/
+なるほど
+
+** 横スクロール
+- [[https://scratch.mit.edu/projects/414350003/][スクロールプラットフォーマーのチュートリアル（素材） on Scratch]]
+
+** 物理エンジン
+[[https://en.scratch-wiki.info/wiki/How_to_Make_a_Physics_Engine][How to Make a Physics Engine - Scratch Wiki]]

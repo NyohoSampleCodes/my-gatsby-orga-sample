@@ -1,0 +1,71 @@
+#+title: Blender
+#+tags: Blender
+#+date: <2014-07-24 Thu>
+
+* 操作
+- Tab :: モード切替 (object mode ←→ edit mode)
+- 右クリック :: つかむ (選択)
+- Shift + 右クリック :: 追加選択
+- 左クリック :: 確定
+- A :: 全選択/解除
+- B :: 範囲指定
+- C :: 円盤で選択
+- G :: 移動
+- X :: 削除
+- G X :: world coordinate のX方向に移動
+- G X X :: local coordinate のX方向に移動
+- S :: 拡大縮小
+- Ctrl + Z :: Undo
+- Option + R :: 回転
+- N :: 右に properties panel を出す
+- Ctrl + R :: ループカット
+- Shift + A :: context menu みたいなのが出る。
+- Ctrl + Alt + Q :: quad view
+- Fn + 0 :: Camera perspective
+- Fn + 1 :: front
+- Fn + 3 :: from left
+- Fn + 7 :: top view
+- Fn + 2,8 :: 15°回転 上下
+- Fn + 4,6 :: 15°回転 左右
+- Fn + 9 :: 逆側を見る
+- Fn + 5 :: 射影モード
+
+視点移動
+- トラックパッドスクロール :: 視点回転
+- Shift + トラックパッドスクロール :: 視点平行移動
+- Ctrl + トラックパッドスクロール :: 視点拡大縮小
+
+数値指定操作 [[https://wiki.blender.org/index.php/Doc:JA/2.6/Manual/3D_interaction/Transform_Control/Numeric_Input][Doc:JA/2.6/Manual/3D interaction/Transform Control/Numeric Input - BlenderWiki]]
+
+** bone
+1. armatureを入れる。
+2. 関連付けたいメッシュを選択して、次に armature を shift + 右クリック。
+3. ctrl + p というか、Object Mode となっているところの Object menu から Parent -> Bone (-> Auto Weights) と選んだらうまくいった。
+4. Object Mode を Pose Mode にして、armature (bone) の一つを rotate してみたら、ちゃんと mesh がついてきた。
+
+- [[http://nn-hokuson.hatenablog.com/entry/2017/10/03/205639][【Blender】ボーンを入れる（リギング）ための基本手順 - おもちゃラボ]]
+
+なんと add-on の Rigify というので人型のボーンを一発作成できる: [[http://nn-hokuson.hatenablog.com/entry/2017/04/20/202447][【Unity】Blenderで人型のボーンを入れて、Animatorで走るアニメを再生する - おもちゃラボ]]
+
+* Tips
+** Smoothing
+- [[https://www.blender.org/manual/modeling/meshes/smoothing.html][Smoothing — Blender Reference Manual]] Decimate modifier を使う。
+
+* 参考サイト
+
+チュートリアル
+- [[http://nvtrlab.jp/column/2-1][初心者のための！作って学ぶBlenderの基礎：①基本操作とBlender紹介 | 日本VTR実験室]]
+- [[http://cg.xyamu.net/Blender/][Blender (「CG制作」)]]
+- [[http://www.blender.org/support/tutorials/][Tutorials - blender.org - Home of the Blender project - Free and Open 3D Creation Software]]
+- [[https://www.youtube.com/watch?v=ySyQsLD_7GM][Blender 2.71 Cloth Sew Tutorial - YouTube]]
+- [[https://www.youtube.com/watch?v=il7ajiCepus][Adding a Texture to a Plane Using Blender 2.61 - YouTube]]
+
+ビデオ
+- [[https://www.youtube.com/playlist?list=PLCb1SyYljsLNW8_XRIu8XYhd3pPnUlmF6][Blender - YouTube]] すばらしいチュートリアル。
+- [[https://www.youtube.com/watch?v=c-0oBXJZwQE][Blender DVD training 8 : Humane Rigging Part 1 - YouTube]]
+- [[https://www.youtube.com/watch?v=ssd4ZNNpY-s][Ivan Cappiello and Paolo Acampora - A Skeleton Animated Story - YouTube]]
+- [[https://www.youtube.com/watch?v=HomAZcKm3Jo][Sintel OFFICIAL | FULL MOVIE (2010) Blender open movie project - YouTube]]
+- [[https://www.youtube.com/watch?v=3GC5LoFL2x4&feature=youtu.be][Dr.プッツンコと３ＤＣＧをはじめよう！Blenderのダウンロードから基本操作 - YouTube]] 
+
+操作メモ
+- [[http://momonga88.sakura.ne.jp/glacies/?p=60][Blender初歩の使い方まとめ１ – Gracies]]

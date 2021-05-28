@@ -1,0 +1,4 @@
+
+
+分散ツール
+- [[https://deepmind.com/research/open-source/launchpad?utm_campaign=piqcy&utm_medium=email&utm_source=Revue%20newsletter][Launchpad: a programming model for distributed machine learning research | DeepMind]]

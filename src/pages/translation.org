@@ -1,0 +1,10 @@
+#+title: 翻訳関連
+
+翻訳関連のメモ
+
+* 翻訳メモリ
+- [[https://translate.google.com/toolkit/][Google Translator Toolkit]] なくなった。
+- [[http://omegat.org][OmegaT]]
+
+* Tools
+- [[http://purplebaby.opal.ne.jp/2011/06/youtubecgi.html][YOUTUBE動画の字幕をダウンロードするCGI - purplebabyのブログ]]

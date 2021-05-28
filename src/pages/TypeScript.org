@@ -1,0 +1,11 @@
+
+TypeScript
+
+- [[https://www.typescriptlang.org/docs/handbook/react-&-webpack.html][React & Webpack · TypeScript]]
+- [[https://hackernoon.com/react-with-typescript-and-webpack-654f93f34db6][React with Typescript and Webpack - By]]
+- [[https://qiita.com/uryyyyyyy/items/63969d6ed9341affdffb][React + TypeScript + Webpackの最小構成 - Qiita]]
+- [[https://www.google.com/search?client=safari&rls=en&q=how+to+start+typescript+react+package.json+webpack&ie=UTF-8&oe=UTF-8][how to start typescript react package.json webpack - Google 検索]]
+- [[https://book.yyts.org/][サバイバルTypeScript]]
+ 
+* サンプルコード
+- [[https://github.com/aws/aws-cdk][aws/aws-cdk: The AWS Cloud Development Kit is a framework for defining cloud infrastructure in code]]

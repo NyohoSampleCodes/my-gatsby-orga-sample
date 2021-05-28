@@ -1,0 +1,26 @@
+Samba
+
+smb.conf で
+
+#+BEGIN_SRC conf
+security = user
+#+END_SRC
+
+とすると、ユーザレベルで認証される。
+UNIXアカウント david を作成しておき、
+#+BEGIN_SRC sh
+pdbedit -a david
+#+END_SRC
+とすると登録される。
+
+#+BEGIN_SRC sh
+firewall-cmd --add-service=samba --permanent
+firewall-cmd --reload
+#+END_SRC
+
+まだ認証がうまくいかない。
+
+* Links
+- [[https://www.virment.com/config-sambaserver/][sambaサーバによるファイル共有環境の構築手順]]
+- [[http://d.hatena.ne.jp/bluerepliroid/20071212/1158114992][sambaによるLinuxとWindowsのファイル共有 - intrinsic feeling]]
+

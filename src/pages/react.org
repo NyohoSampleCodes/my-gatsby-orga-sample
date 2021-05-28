@@ -1,0 +1,7 @@
+
+React
+
+- [[https://github.com/mars/create-react-app-buildpack][mars/create-react-app-buildpack: ⚛️ Heroku Buildpack for create-react-app: static hosting for React.js web apps]]
+
+Animation
+- [[https://reactjs.org/docs/animation.html][Animation Add-Ons – React]]

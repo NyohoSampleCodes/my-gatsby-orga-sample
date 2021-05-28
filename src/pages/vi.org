@@ -1,0 +1,19 @@
+#+title: VI
+
+VI, which is not six.
+
+* 操作
+- 0 :: 行頭へ
+- $ :: 行末へ
+- dw :: 単語削除
+- d$ :: 行末まで削除
+- yy :: yank (copy)
+- p :: paste カーソル後に
+- P :: paste カーソル前に
+- H,M,L :: 画面の上・真ん中・下へ移動
+
+* Links
+- [[https://loumo.jp/wp/archive/20080701175525/][プログラマが知っておくべき100のVimコマンド | Lonely Mobiler]]
+- [[https://qiita.com/hachi8833/items/7beeee825c11f7437f54][Vim幼稚園からVim小学校へ - Qiita]]
+- [[http://tyru.hatenablog.com/entry/2016/12/04/000025][ミニマリストな Vimmer におすすめしたい履歴管理プラグイン oldfilesearch.vim - Humanity]]
+- [[https://www.slideshare.net/cohama/vim-nagoyavim-1][(初心者向け) Vim の機能紹介＠nagoya.vim #1]]

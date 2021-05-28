@@ -1,0 +1,8 @@
+
+Wi-Fi 情報
+
+* メッシュWi-Fi
+- [[https://amzn.to/2sav8kT][VELOP (LINKSYS)]]
+- [[https://tennojiac.wordpress.com/2018/11/10/belkin-velop-wifi/][メッシュ Wi-fi が来た！ | TAC（天王寺アップルクラブ）]]
+- [[https://tennojiac.wordpress.com/2018/12/15/velop-2/][Velop 導入後の Wi-Fi 環境 | TAC（天王寺アップルクラブ）]]
+- [[https://www.jp.netgear.com/orbi/][Orbi：どこにいても快適なWiFiを実現するシステム | NETGEAR]]

@@ -1,0 +1,23 @@
+The Rubik's Cube
+
+* 基本
+- https://www.pazru.net/rubic
+- [[http://www.macozy.com/rubik/3rc/step1.html][ステップ１．１面とその側面１段目まで揃えよう！]]
+- https://www.pazru.net/rubic/2.htm
+- [[http://www.macozy.com/rubik/3rc/step4.html#td][ステップ４．上面を揃えよう！]] 
+- [[https://www.youtube.com/watch?v=QysdvUVL_e0][【マジで出来る！】超かんたん６面完成手順「第７段階目」【ルービックキューブ】 - YouTube]]
+
+* スピードキューブ
+解法 CFOP, 簡易LBL
+
+- [[http://tribox.com/3x3x3/solution/easy/][初めてのルービックキューブ | tribox]]
+- [[https://cubevoyage.net/how-to-solve/][ルービックキューブのそろえ方 | Cube Voyage]]
+- [[https://cubevoyage.net/how-to-solve/intermediate/][中級編 | Cube Voyage]]
+
+** F2L
+- [[https://cubevoyage.net/how-to-solve/advanced/f2l-theory/][F2Lの手順は覚えなくていい！？ | Cube Voyage]]
+- [[https://www.youtube.com/watch?v=vrzP_eU5Jzw&t=197s][【ルービックキューブ】カンタンなF2Lのやり方(２列目までを早く揃える方法) - YouTube]]
+- [[https://www.youtube.com/watch?v=3hgo3gcyXhI][【ルービックキューブF2L】絶対わかるF2L！Feliks氏のF2Lベーシックから学んだ① - YouTube]]
+
+* 動画
+- [[https://www.youtube.com/watch?v=0Bg5CGThSDQ][【ルービックキューブそろえ方！】初中級者が簡単に1分30秒で６面完成|とりあえず揃えられれば大丈夫！ - YouTube]]

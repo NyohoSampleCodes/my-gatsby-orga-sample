@@ -1,0 +1,66 @@
+#+title: Logic Pro X
+
+Logic Pro X の使い方メモ
+
+* エフェクト・加工
+
+** ステレオ素材をモノラルにする。
+
+master の "Stereo Out" のeffect のところで Gain の "Convert To Mono" を追加する。
+
+** Strip Silence
+オーディオを選択 -> 右クリック -> 「オーディオリージョンから無音部分を削除」
+
+うっすら声が乗ってしまっている場合は、strip silence の下限を up。
+
+** Compression
+Audio FX -> Dynamics -> Compressor -> Mono
+
+- detection :: peak
+- threashold :: -3?
+- auto gain :: off
+- release :: 50
+- attack :: 6?
+
+** コーラス
+ボーカルのハモりに
+- Glimmering Chorus (moduration -> chorus)
+- Channel EQ で低音成分抑えめ
+- compressor
+
+** 音圧調整
+Dynamics -> Adaptive Limiter 
+
+- Out Ceiling を超えないようにしてくれる。
+- Out Ceiling を -0.1 dB ぐらいにしておく。
+- あとは好きなだけ Gain を上げる。
+- reduction は下げても -6 ぐらい?
+
+  
+Metering -> Loudness meter を使って LUFS を見る。
+
+* 編集
+** 速度調整
+Varispeed [[https://support.apple.com/kb/PH13094?locale=ja_JP&viewlocale=ja_JP][Logic Pro X: Varispeedを使ってオーディオの速度とピッチを変更する]]
+
+* Bounce
+** ループ音源を作るには
+ループ音源を作るには、バウンスのときに「リアルタイム」を選択し、「2番目のサイクルパスをバウンス」をチェックする。
+最後のリバーブがぶち切れにならずに前に戻って出てくれる。
+
+* Shortcuts
+- =,= と =.= :: 左右にちょっとカーソル移動
+- shift + f :: 後続のものを全て選択する
+- opt + left/right :: 左右にナッジ
+- x :: ミキサを表示
+
+** nudge value ナッジ値
+nudge value を tick や division や beat などにセットする
+
+編集 -> 移動 -> ナッジ
+
+
+
+* Links
+- [[https://sleepfreaks-dtm.com/category/for-beginner-logic/][Logic Proの使い方 初心者編]]
+- [[https://www.youtube.com/watch?v=wnw1kXBX1-E][Logic Pro X 初心者講座 ㉟ 音圧調整と楽曲の書き出し（Sleepfreaks DTMスクール） - YouTube]]

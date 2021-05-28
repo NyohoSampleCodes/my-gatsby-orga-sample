@@ -1,0 +1,11 @@
+
+
+* GitHub Actions
+使い始めるには https://github.com/features/actions/ でサインアップする。
+
+** 便利な使い方
+(from ruby-jp Slack)
+
+- (on pull_request で) 特定のディレクトリ以下が変更されたら対応するラベルを付ける（monorepoなので変更コンポーネントがひと目で分かる嬉しさ）
+- (pull_request で) [[https://github.com/danger/danger][danger/danger]]
+- イシューに特定のラベルがついたら Slack 通知

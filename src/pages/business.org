@@ -1,0 +1,10 @@
+
+ビジネス系のノウハウ
+
+* Interviews
+- [[https://resource.foundx.jp/interview/][スタートアップの顧客インタビューのやり方（厳選記事） - FoundX Startup Resources]]
+  - 課題探索インタビューに使える質問集
+  - ソリューション検証インタビューに使える質問集
+- [[https://review.foundx.jp/entry/how-to-talk-to-users][ユーザーインタビューの基本（Startup School 2019 #02） - FoundX Review - 起業家とスタートアップのためのノウハウ情報]]
+- [[https://www.slideshare.net/takaumada/lean-customer-development-lean-startup-update-2015][人間と話す: Lean Customer Development (Lean Startup Update 2015)]]
+- [[https://u-site.jp/alertbox/user-interviews][ユーザーインタビュー： 実施の理由・方法・タイミング – U-Site]]

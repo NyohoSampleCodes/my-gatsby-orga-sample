@@ -1,0 +1,49 @@
+fish shell
+
+- https://fishshell.com/ 公式
+- [[http://fish.rubikitch.com/][全訳！fishシェル普及計画]] るびきちさんによる解説 + ドキュメント翻訳サイト
+
+* Installation
+** macOS
+#+BEGIN_SRC sh
+brew install fish
+
+#しなくてもいい・・・というかしない方が安全
+echo "/usr/local/bin/fish" | sudo tee -a /etc/shells
+chsh -s /usr/local/bin/fish 
+#+END_SRC
+
+** Linux
+Ubuntu
+#+BEGIN_SRC sh
+sudo apt-add-repository ppa:fish-shell/release-2
+sudo apt-get update
+sudo apt-get install fish
+
+chsh -s /usr/bin/fish
+#+END_SRC
+
+* 便利なの
+
+#+BEGIN_SRC sh
+fisher install z fzf decors/fish-ghq
+#+END_SRC
+
+- ctrl + r :: __fzf_reverse_isearch
+- ctrl + t :: __fzf_find_file
+
+* コマンド
+- bind :: 現在のキーバインド一覧出来る
+- \help :: ヘルプがウェブブラウザで開かれる。
+- alt + p :: __fish_paginate (おおこれは便利)
+- alt + e :: コマンドバッファをエディタで編集できる。これは便利かもしれんけどバインドを忘れていたらあまり便利でもない
+- fish_config :: なんと設定画面をウェブブラウザで開いてくれる
+
+* Tips
+拡張子を取り除く
+#+BEGIN_SRC fish
+  for f in *.png
+      convert $f (basename $f .png).jpg
+  end
+#+END_SRC
+

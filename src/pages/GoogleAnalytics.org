@@ -1,0 +1,16 @@
+
+
+Google Analytics memo
+
+
+* 検索からの流入など
+
+「集客」→「すべてのトラフィック」→「チャネル」
+
+* 検索キーワードを調べる
+「集客」 → 「キャンペーン」 → 「オーガニック検索キーワード」
+
+
+* Search Console
+Search Console
+ (webmaster toolという名前が変わった)

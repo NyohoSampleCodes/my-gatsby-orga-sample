@@ -1,0 +1,20 @@
+
+
+gcc
+* build
+ローカル (=$HOME/local=) にインストールする方法
+
+gmp を入れる。
+
+mpfr を入れる。
+
+mpc を入れる。
+
+: ./configure --prefix=$HOME/local --with-gmp=$HOME/local --with-mpfr=$HOME/local
+
+いよいよ gcc を。
+
+#+begin_src sh
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$HOME/local/lib
+./configure --prefix=$HOME/local --with-gmp=$HOME/local --with-mpfr=$HOME/local --disable-multilib
+#+end_src

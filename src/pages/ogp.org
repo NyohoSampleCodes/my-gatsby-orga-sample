@@ -1,0 +1,9 @@
+
+Open Graph
+
+ogp
+
+- [[https://developers.facebook.com/tools/debug/og/object/][オブジェクトデバッガー - 開発者向けFacebook]]
+- [[https://developers.facebook.com/tools/debug/sharing/][デバッガーを共有 - 開発者向けFacebook]]
+- https://cards-dev.twitter.com/validator
+

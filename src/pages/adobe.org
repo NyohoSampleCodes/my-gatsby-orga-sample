@@ -1,0 +1,4 @@
+#+title: Adobe製品のメモ書き
+
+* Adobe Capture
+iPhoneで写真を撮ってカラースキームを保存できる。

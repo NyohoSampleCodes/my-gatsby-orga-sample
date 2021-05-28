@@ -1,0 +1,18 @@
+.footnote::before {
+  content: "[" attr(data-label) "]";
+  display: inline-block;
+}
+
+footer {
+    margin: 0 auto;
+    max-width: 720px;
+}
+
+ul.tags {
+
+}
+
+.tags li {
+    display: table-cell;
+    padding: 3px 4px;
+}

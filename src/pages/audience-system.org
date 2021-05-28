@@ -1,0 +1,8 @@
+#+title: 聴衆に質問などを集めるシステム
+
+シンポジウムやカンファレンスや勉強会などで、聴衆の質問などを集めるシステムを集めます。
+ウェブのシステムが色々あります。
+
+- [[https://handsup.cloud/][handsup!]]
+- [[https://www.mentimeter.com/][Mentimeter]] 多機能
+- [[https://www.sli.do/][Slido]]

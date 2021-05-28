@@ -1,0 +1,5 @@
+#+title: AR
+
+
+* Links
+- [[https://github.com/jcmellado/js-aruco][jcmellado/js-aruco: JavaScript library for Augmented Reality applications]]

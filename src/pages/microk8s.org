@@ -1,0 +1,6 @@
+
+Micro Kubernetes
+
+#+begin_src sh
+microk8s.enable dns dashboard
+#+end_src

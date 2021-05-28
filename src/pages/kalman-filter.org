@@ -1,0 +1,4 @@
+#+title: Kalman filter
+
+- [[https://www.youtube.com/watch?v=N6HFAJq3vUQ][【カルマンフィルター入門】Part 1: カルマンフィルターが選ばれる理由 - YouTube]]
+- [[https://www.youtube.com/watch?v=0HI3Tk6PKMw][【カルマンフィルター入門】Part 2: 状態推定器 - YouTube]]
