@@ -4,13 +4,13 @@
   "version": "0.0.0",
   "author": "Yukinori Kitadai <algebraicallyClosedField@gmail.com>",
   "dependencies": {
-    "gatsby": "^3.6.1",
-    "gatsby-plugin-typography": "^3.6.0",
-    "gatsby-source-filesystem": "^3.6.0",
+    "gatsby": "^3.7.2",
+    "gatsby-plugin-typography": "^3.7.1",
+    "gatsby-source-filesystem": "^3.7.1",
     "gatsby-transformer-orga": "^2.4.8",
     "graphql": "^15.5.0",
     "mime": "^2.5.2",
-    "postcss": "^8.3.0",
+    "postcss": "^8.3.5",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-helmet": "^6.1.0",
@@ -34,7 +34,7 @@
     "deploy": "gatsby build --prefix-paths && gh-pages -d public"
   },
   "devDependencies": {
-    "gh-pages": "^3.2.0",
-    "prettier": "^2.3.0"
+    "gh-pages": "^3.2.2",
+    "prettier": "^2.3.1"
   }
 }
